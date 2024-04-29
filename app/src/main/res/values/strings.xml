@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">PART2 Shopping List</string>
+    <string name="add_product">Add Product</string>
+    <string name="hint_product">Product Name...</string>
+    <string name="button_save">Save</string>
+
+    <string-array name="labels_unit">
+        <item>Unit</item>
+        <item>Kg</item>
+        <item>Liter</item>
+    </string-array>
+</resources>
