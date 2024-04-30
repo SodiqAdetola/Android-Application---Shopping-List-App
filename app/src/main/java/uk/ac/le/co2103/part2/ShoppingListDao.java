@@ -1,5 +1,6 @@
 package uk.ac.le.co2103.part2;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
@@ -17,7 +18,7 @@ public interface ShoppingListDao {
         void deleteAll();
 
         @Query("SELECT * From ShoppingList_table ORDER BY name ASC")
-        List<ShoppingList> getAlphabetisedShoppingLists();
+        LiveData<List<ShoppingList>> getAlphabetisedShoppingLists();
 
 
 

@@ -24,7 +24,7 @@ public abstract class ProductDB extends RoomDatabase {
             synchronized (ProductDB.class) {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                                    ProductDB.class, "word_database")
+                                    ProductDB.class, "product_database")
                             .build();
                 }
             }

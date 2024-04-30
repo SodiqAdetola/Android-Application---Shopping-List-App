@@ -16,7 +16,7 @@ public class ShoppingList {
 
     private String image;
 
-    private List<Product> products;
+    // private List<Product> products;
 
 
     public int getListId() {

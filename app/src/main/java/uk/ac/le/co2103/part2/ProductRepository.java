@@ -19,7 +19,7 @@ public class ProductRepository {
     }
     void insert(Product product) {
         ProductDB.databaseWriteExecutor.execute(() -> {
-            productDao.insert(product);
+            productDao.inserts(product);
         });
     }
 }

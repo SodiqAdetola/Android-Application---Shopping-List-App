@@ -9,6 +9,7 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "product_table")
 public class Product {
     @PrimaryKey
+    @NonNull
     @ColumnInfo(name = "Name")
     private String name;
     private int quantity;
@@ -18,7 +19,7 @@ public class Product {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(@NonNull String name) {
         this.name = name;
     }
 
