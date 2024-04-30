@@ -1,4 +1,4 @@
-package uk.ac.le.co2103.part2.domain;
+package uk.ac.le.co2103.part2;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
