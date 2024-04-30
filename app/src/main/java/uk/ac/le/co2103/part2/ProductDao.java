@@ -12,7 +12,7 @@ import uk.ac.le.co2103.part2.Product;
 @Dao
 public interface ProductDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    void inserts(Product product);
+    void insert(Product product);
     @Query("DELETE FROM product_table")
     void deleteAll();
     @Query("SELECT * FROM product_table ORDER BY Name ASC")

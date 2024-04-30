@@ -1,5 +1,7 @@
 package uk.ac.le.co2103.part2;
 
+import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -9,15 +11,27 @@ import java.util.List;
 
 public class ShoppingList {
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     private int listId;
-
+    @NonNull
+    @ColumnInfo(name = "name")
     private String name;
 
     private String image;
 
     // private List<Product> products;
 
+    public ShoppingList(@NonNull String name) {
+        this.name = name;
+    }
+    @NonNull
+    public String getName() {
+        return name;
+    }
+
+    public void setName(@NonNull String name) {
+        this.name = name;
+    }
 
     public int getListId() {
         return listId;
@@ -27,13 +41,7 @@ public class ShoppingList {
         this.listId = listId;
     }
 
-    public String getName() {
-        return name;
-    }
 
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public String getImage() {
         return image;

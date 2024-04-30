@@ -2,9 +2,11 @@ package uk.ac.le.co2103.part2;
 
 import android.content.Context;
 
+import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -24,11 +26,25 @@ public abstract class ProductDB extends RoomDatabase {
             synchronized (ProductDB.class) {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                                    ProductDB.class, "product_database")
-                            .build();
+                                    ProductDB.class, "product_database").addCallback(sRoomDatabaseCallback).build();
                 }
             }
         }
         return INSTANCE;
     }
+
+    private static RoomDatabase.Callback sRoomDatabaseCallback = new RoomDatabase.Callback() {
+        @Override
+        public void onCreate(@NonNull SupportSQLiteDatabase db) {
+            super.onCreate(db);
+            databaseWriteExecutor.execute(() -> {
+                ProductDao dao = INSTANCE.productDao();
+                dao.deleteAll();
+                Product product = new Product("Chocolate");
+                dao.insert(product);
+                product = new Product("Eggs");
+                dao.insert(product);
+            });
+        }
+    };
 }

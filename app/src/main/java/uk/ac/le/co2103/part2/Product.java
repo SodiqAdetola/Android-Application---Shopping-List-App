@@ -15,6 +15,10 @@ public class Product {
     private int quantity;
     private String unit;
 
+    public Product(@NonNull String name) {
+        this.name = name;
+    }
+@NonNull
     public String getName() {
         return name;
     }
