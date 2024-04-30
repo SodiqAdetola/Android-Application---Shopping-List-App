@@ -19,10 +19,13 @@ public class ShoppingList {
 
     private String image;
 
-    // private List<Product> products;
 
     public ShoppingList(@NonNull String name) {
         this.name = name;
+    }
+
+    public String getShoppingList() {
+        return name;
     }
     @NonNull
     public String getName() {

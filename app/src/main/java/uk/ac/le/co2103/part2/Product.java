@@ -18,6 +18,10 @@ public class Product {
     public Product(@NonNull String name) {
         this.name = name;
     }
+
+    public String getProduct() {
+        return name;
+    }
 @NonNull
     public String getName() {
         return name;
