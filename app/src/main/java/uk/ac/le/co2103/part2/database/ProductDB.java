@@ -1,4 +1,4 @@
-package uk.ac.le.co2103.part2;
+package uk.ac.le.co2103.part2.database;
 
 import android.content.Context;
 
@@ -8,6 +8,9 @@ import androidx.room.RoomDatabase;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+
+import uk.ac.le.co2103.part2.Dao.ProductDao;
+import uk.ac.le.co2103.part2.domain.Product;
 
 @Database(entities = {Product.class}, version = 1, exportSchema = false)
 abstract class ProductRoomDatabase extends RoomDatabase {
