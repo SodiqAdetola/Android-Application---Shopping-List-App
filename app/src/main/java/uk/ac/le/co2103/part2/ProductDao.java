@@ -1,5 +1,6 @@
 package uk.ac.le.co2103.part2;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
@@ -12,5 +13,5 @@ public interface ProductDao {
     @Query("DELETE FROM product_table")
     void deleteAll();
     @Query("SELECT * FROM product_table ORDER BY Name ASC")
-    List<Product> getAlphabetisedProducts();
+    LiveData<List<Product>> getAlphabetisedProducts();
 }
