@@ -1,5 +1,6 @@
 package uk.ac.le.co2103.part2;
 
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -9,6 +10,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -18,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
     public static final int CREATE_LIST_ACTIVITY_REQUEST_CODE = 1;
     private ShoppingListViewModel shoppingListViewModel;
+    public static final int SHOPPING_LIST_ACTIVITY_REQUEST_CODE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +55,19 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+
+        adapter.setOnItemClickListener(new ShoppingListAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(ShoppingList shoppingList) {
+                // Launch ShoppingListActivity when a shopping list item is clicked
+                Intent intent = new Intent(MainActivity.this, ShoppingListActivity.class);
+                startActivityForResult(intent, SHOPPING_LIST_ACTIVITY_REQUEST_CODE);
+            }
+        });
+
+
+
+
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent
@@ -69,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
 
             shoppingListViewModel.insert(shoppingList);
         }
+
     }
 
 
