@@ -25,27 +25,12 @@ public abstract class ShoppingListDB extends RoomDatabase {
         if (INSTANCE == null) {
             synchronized (ShoppingList.class) {
                 if (INSTANCE == null) {
-                    INSTANCE = Room.databaseBuilder(context.getApplicationContext(), ShoppingListDB.class, "shoppinglist_db").addCallback(sRoomDatabaseCallback).build();
+                    INSTANCE = Room.databaseBuilder(context.getApplicationContext(), ShoppingListDB.class, "shoppinglist_db").build();
                 }
             }
         }
         return INSTANCE;
     }
-    private static RoomDatabase.Callback sRoomDatabaseCallback = new RoomDatabase.Callback() {
-        @Override
-        public void onCreate(@NonNull SupportSQLiteDatabase db) {
-            super.onCreate(db);
-
-            databaseWriteExecutor.execute(() -> {
-                ShoppingListDao dao = INSTANCE.shoppinglistDao();
-                dao.deleteAll();
-                ShoppingList shoppingList = new ShoppingList("ClothingList");
-                dao.insert(shoppingList);
-                shoppingList = new ShoppingList("FoodList");
-                dao.insert(shoppingList);
-            });
-        }
-    };
 
 
 }
