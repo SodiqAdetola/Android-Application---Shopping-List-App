@@ -10,14 +10,34 @@ import androidx.recyclerview.widget.RecyclerView;
 public class ShoppingListViewHolder extends RecyclerView.ViewHolder {
 
     private final TextView shoppingListTextView;
+    private OnShoppingListItemLongClickListener longClickListener;
 
     public interface OnShoppingListItemLongClickListener {
         void onItemLongClick(int position);
     }
 
+    public void setOnItemLongClickListener(OnShoppingListItemLongClickListener listener) {
+        this.longClickListener = listener;
+    }
+
+
+
     private ShoppingListViewHolder(View shoppingListView) {
         super(shoppingListView);
         shoppingListTextView = shoppingListView.findViewById(R.id.textView);
+
+        // Set long-click listener for the itemView
+
+        shoppingListView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                if (longClickListener != null) {
+                    longClickListener.onItemLongClick(getAdapterPosition());
+                    return true;
+                }
+                return false;
+            }
+        });
 
     }
 

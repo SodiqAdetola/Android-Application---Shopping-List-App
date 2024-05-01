@@ -3,11 +3,13 @@ package uk.ac.le.co2103.part2;
 import static java.nio.file.Files.delete;
 
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -72,9 +74,26 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemLongClick(ShoppingList shoppingList) {
                 // Handle long-click event here (delete shopping list and contained products)
-                deleteShoppingList(shoppingList);
+               // deleteShoppingList(shoppingList);
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                builder.setMessage("Are you sure you want to delete this shopping list?");
+                builder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Call the method to delete the shopping list
+                        deleteShoppingList(shoppingList);
+                    }
+                });
+                builder.setNegativeButton("Cancel", null);
+                builder.show();
+
+
             }
         });
+
+
+
 
 
 
