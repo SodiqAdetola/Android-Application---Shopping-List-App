@@ -10,10 +10,17 @@ import androidx.recyclerview.widget.RecyclerView;
 public class ShoppingListViewHolder extends RecyclerView.ViewHolder {
 
     private final TextView shoppingListTextView;
+
+    public interface OnShoppingListItemLongClickListener {
+        void onItemLongClick(int position);
+    }
+
     private ShoppingListViewHolder(View shoppingListView) {
         super(shoppingListView);
         shoppingListTextView = shoppingListView.findViewById(R.id.textView);
+
     }
+
     public void bind(String text) {
         shoppingListTextView.setText(text);
     }
@@ -22,4 +29,7 @@ public class ShoppingListViewHolder extends RecyclerView.ViewHolder {
                 .inflate(R.layout.recyclerview_item, parent, false);
         return new ShoppingListViewHolder(view);
     }
+    // Method to set the ShoppingListRepository instance
+
+
 }

@@ -10,14 +10,22 @@ import androidx.recyclerview.widget.ListAdapter;
 public class ShoppingListAdapter extends ListAdapter<ShoppingList, ShoppingListViewHolder> {
 
     private OnItemClickListener listener;
+    private OnItemLongClickListener longClickListener;
 
     public interface OnItemClickListener {
         void onItemClick(ShoppingList shoppingList);
+    }
+    public interface OnItemLongClickListener {
+        void onItemLongClick(ShoppingList shoppingList);
     }
 
     public void setOnItemClickListener(OnItemClickListener listener) {
         this.listener = listener;
     }
+    public void setOnItemLongClickListener(OnItemLongClickListener listener) {
+        this.longClickListener = listener;
+    }
+
     public ShoppingListAdapter(@NonNull DiffUtil.ItemCallback<ShoppingList> diffCallback)
     {
         super(diffCallback);
@@ -40,6 +48,18 @@ public class ShoppingListAdapter extends ListAdapter<ShoppingList, ShoppingListV
                 if (listener != null) {
                     listener.onItemClick(current);
                 }
+            }
+        });
+
+        // Set OnLongClickListener for the item view
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                if (longClickListener != null) {
+                    longClickListener.onItemLongClick(current);
+                    return true;
+                }
+                return false;
             }
         });
 

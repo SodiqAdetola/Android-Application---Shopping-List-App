@@ -1,5 +1,7 @@
 package uk.ac.le.co2103.part2;
 
+import static java.nio.file.Files.delete;
+
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -65,6 +67,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // Set OnItemLongClickListener for individual items in the RecyclerView
+        adapter.setOnItemLongClickListener(new ShoppingListAdapter.OnItemLongClickListener() {
+            @Override
+            public void onItemLongClick(ShoppingList shoppingList) {
+                // Handle long-click event here (delete shopping list and contained products)
+                deleteShoppingList(shoppingList);
+            }
+        });
+
 
 
 
@@ -86,6 +97,11 @@ public class MainActivity extends AppCompatActivity {
             shoppingListViewModel.insert(shoppingList);
         }
 
+    }
+
+
+    private void deleteShoppingList(ShoppingList shoppingList) {
+        shoppingListViewModel.delete(shoppingList);
     }
 
 

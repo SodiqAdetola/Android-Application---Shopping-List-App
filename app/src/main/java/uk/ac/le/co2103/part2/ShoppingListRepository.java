@@ -22,4 +22,14 @@ public class ShoppingListRepository {
             shoppingListDao.insert(shoppingList);
         });
     }
+
+
+    void delete(ShoppingList shoppingList) {
+        ShoppingListDB.databaseWriteExecutor.execute(() -> {
+            shoppingListDao.delete(shoppingList);
+            shoppingListDao.deleteProductsByShoppingListId(shoppingList.getListId());
+        });
+    }
+
+
 }

@@ -18,4 +18,6 @@ public class ShoppingListViewModel extends AndroidViewModel {
     LiveData<List<ShoppingList>> getAllShoppingLists() { return allShoppingLists; }
     public void insert(ShoppingList shoppingList) { repo.insert(shoppingList); }
 
+    public void delete(ShoppingList shoppingList) {repo.delete(shoppingList); }
+
 }
