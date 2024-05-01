@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
             assert shoppingListName != null;
 
             ShoppingList shoppingList = new ShoppingList(shoppingListName);
-            shoppingList.setImage(imageUri.toString());
+            shoppingList.setImage(imageUri);
 
             shoppingListViewModel.insert(shoppingList);
         }
