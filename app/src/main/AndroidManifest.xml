@@ -9,9 +9,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Lab13">
         <activity
+            android:name=".AddProductActivity"
+            android:exported="false" />
+        <activity
             android:name=".ShoppingListActivity"
             android:exported="false"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".CreateListActivity"
             android:exported="false" />

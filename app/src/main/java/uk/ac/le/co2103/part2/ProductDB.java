@@ -11,7 +11,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {Product.class}, version = 1, exportSchema = false)
+@Database(entities = {Product.class}, version = 3, exportSchema = false)
 public abstract class ProductDB extends RoomDatabase {
 
     public abstract ProductDao productDao();
@@ -26,25 +26,11 @@ public abstract class ProductDB extends RoomDatabase {
             synchronized (ProductDB.class) {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                                    ProductDB.class, "product_database").addCallback(sRoomDatabaseCallback).build();
+                                    ProductDB.class, "product_database").fallbackToDestructiveMigration().build();
                 }
             }
         }
         return INSTANCE;
     }
 
-    private static RoomDatabase.Callback sRoomDatabaseCallback = new RoomDatabase.Callback() {
-        @Override
-        public void onCreate(@NonNull SupportSQLiteDatabase db) {
-            super.onCreate(db);
-            databaseWriteExecutor.execute(() -> {
-                ProductDao dao = INSTANCE.productDao();
-                dao.deleteAll();
-                Product product = new Product("Chocolate");
-                dao.insert(product);
-                product = new Product("Eggs");
-                dao.insert(product);
-            });
-        }
-    };
 }

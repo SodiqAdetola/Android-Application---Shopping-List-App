@@ -12,7 +12,7 @@ import java.util.concurrent.Executors;
 //import uk.ac.le.co2103.part2.domain.Product;
 //import uk.ac.le.co2103.part2.domain.ShoppingList;
 
-@Database(entities = {ShoppingList.class, Product.class}, version = 1, exportSchema = false)
+@Database(entities = {ShoppingList.class, Product.class}, version = 3, exportSchema = false)
 public abstract class ShoppingListDB extends RoomDatabase {
 
     public abstract ShoppingListDao shoppinglistDao();
@@ -25,7 +25,7 @@ public abstract class ShoppingListDB extends RoomDatabase {
         if (INSTANCE == null) {
             synchronized (ShoppingList.class) {
                 if (INSTANCE == null) {
-                    INSTANCE = Room.databaseBuilder(context.getApplicationContext(), ShoppingListDB.class, "shoppinglist_db").build();
+                    INSTANCE = Room.databaseBuilder(context.getApplicationContext(), ShoppingListDB.class, "shoppinglist_db").fallbackToDestructiveMigration().build();
                 }
             }
         }
