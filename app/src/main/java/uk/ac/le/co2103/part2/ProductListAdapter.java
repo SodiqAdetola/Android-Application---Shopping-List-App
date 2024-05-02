@@ -3,6 +3,7 @@ package uk.ac.le.co2103.part2;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -75,7 +76,11 @@ public class ProductListAdapter  extends ListAdapter<Product, ProductViewHolder>
         builder.setTitle("Options")
                 .setItems(new CharSequence[]{"Edit", "Delete"}, (dialogInterface, i) -> {
                     if (i == 0) {
-                        // Handle edit option
+                        Intent intent = new Intent(context, UpdateProductActivity.class);
+                        intent.putExtra("PRODUCT_NAME", product.getName());
+                        intent.putExtra("SHOPPING_LIST_ID", product.getShoppingListId());
+                        context.startActivity(intent);
+
                     } else if (i == 1) {
                         deleteProduct(product);
                     }

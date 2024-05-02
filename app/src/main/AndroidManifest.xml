@@ -9,6 +9,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Lab13">
         <activity
+            android:name=".UpdateProductActivity"
+            android:exported="false" />
+        <activity
             android:name=".AddProductActivity"
             android:exported="false" />
         <activity

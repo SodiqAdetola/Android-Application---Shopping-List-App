@@ -36,4 +36,10 @@ public class ProductRepository {
         });
     }
 
+    public void updateProduct(Product product) {
+        ProductDB.databaseWriteExecutor.execute(() -> {
+            productDao.updateProduct(product);
+        });
+    }
+
 }
