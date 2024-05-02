@@ -21,4 +21,5 @@ public class ProductViewHolder  extends RecyclerView.ViewHolder{
                 .inflate(R.layout.recyclerview_product, parent, false);
         return new ProductViewHolder(view);
     }
+
 }

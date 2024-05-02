@@ -15,7 +15,7 @@ public class ShoppingListActivity extends AppCompatActivity {
     private static final String TAG = ShoppingListActivity.class.getSimpleName();
 
     private RecyclerView recyclerView;
-    private ProductListAdapter adapter;
+
     private int shoppingListId;
 
     @Override
@@ -28,16 +28,20 @@ public class ShoppingListActivity extends AppCompatActivity {
         Log.d(TAG, "Shopping list ID: " + shoppingListId);
 
         recyclerView = findViewById(R.id.recyclerviewProduct);
-        adapter = new ProductListAdapter(new ProductListAdapter.ProductDiff());
+        ProductListAdapter adapter = new ProductListAdapter(new ProductListAdapter.ProductDiff());
+        adapter.setContext(this); // Pass the context
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
 
 
         ProductViewModel productViewModel = new ViewModelProvider(this).get(ProductViewModel.class);
 
         productViewModel.getProductsByShoppingListId(shoppingListId).observe(this, productList -> {
             adapter.submitList(productList);
-        });
+
+        }
+        );
 
 
         FloatingActionButton fabAddProduct = findViewById(R.id.fabAddProduct);
@@ -47,5 +51,8 @@ public class ShoppingListActivity extends AppCompatActivity {
             intent.putExtra("LIST_ID", shoppingListId);
             startActivity(intent);
         });
+
+
     }
+
 }

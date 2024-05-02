@@ -9,6 +9,7 @@ import java.util.List;
 
 public class ProductViewModel extends AndroidViewModel {
     private ProductRepository repo;
+    private LiveData<Product> productByNameAndListId;
     private final LiveData<List<Product>> AllProducts;
 
     public ProductViewModel (Application application) {
@@ -23,6 +24,13 @@ public class ProductViewModel extends AndroidViewModel {
 
     public LiveData<List<Product>> getProductsByShoppingListId(int shoppingListId) {
         return repo.getProductsByShoppingListId(shoppingListId);
+    }
+    public LiveData<Product> getProductByNameAndListId(String name, int shoppingListId) {
+        productByNameAndListId = repo.getProductByNameAndListId(name, shoppingListId);
+        return productByNameAndListId;
+    }
+    public void deleteProduct(Product product) {
+        repo.deleteProduct(product);
     }
 
 }

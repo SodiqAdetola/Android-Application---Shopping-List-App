@@ -26,4 +26,14 @@ public class ProductRepository {
         return productDao.getProductsByShoppingListId(shoppingListId);
     }
 
+    LiveData<Product> getProductByNameAndListId(String name, int shoppingListId) {
+        return productDao.getProductByNameAndListId(name, shoppingListId);
+    }
+
+    public void deleteProduct(Product product) {
+        ProductDB.databaseWriteExecutor.execute(() -> {
+            productDao.delete(product);
+        });
+    }
+
 }

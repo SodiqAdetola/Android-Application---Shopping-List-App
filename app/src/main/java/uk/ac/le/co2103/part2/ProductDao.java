@@ -2,6 +2,7 @@ package uk.ac.le.co2103.part2;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
@@ -20,6 +21,12 @@ public interface ProductDao {
 
     @Query("SELECT * FROM product_table WHERE shoppingListId = :shoppingListId")
     LiveData<List<Product>> getProductsByShoppingListId(int shoppingListId);
+
+    @Query("SELECT * FROM product_table WHERE name = :name AND shoppingListId = :shoppingListId")
+    LiveData<Product> getProductByNameAndListId(String name, int shoppingListId);
+
+    @Delete
+    void delete(Product product);
 
 
 }

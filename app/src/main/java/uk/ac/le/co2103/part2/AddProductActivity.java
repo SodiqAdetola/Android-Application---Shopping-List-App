@@ -55,20 +55,25 @@ public class AddProductActivity extends AppCompatActivity {
 
         int quantity = Integer.parseInt(quantityStr);
 
-        // Create the product object
-        Product product = new Product(name);
-        product.setQuantity(quantity);
-        product.setUnit(unit);
-        product.setShoppingListId(shoppingListId);
-
-
         ProductViewModel productViewModel = new ViewModelProvider(this).get(ProductViewModel.class);
-        productViewModel.insert(product);
 
-        Log.d(TAG, "Shopping list ID when adding product: " + shoppingListId);
-        Log.d(TAG, "Shopping list ID when adding product: " + product.getShoppingListId());
+        productViewModel.getProductByNameAndListId(name, shoppingListId).observe(this, existingProduct -> {
+            if (existingProduct != null) {
+                // Product with the same name already exists
+                Toast.makeText(this, "Product already exists", Toast.LENGTH_SHORT).show();
+            } else {
+                // Create the product object
+                Product product = new Product(name);
+                product.setQuantity(quantity);
+                product.setUnit(unit);
+                product.setShoppingListId(shoppingListId); // Associate the product with the current shopping list
 
-        finish();
+                // Insert the product into the database
+                productViewModel.insert(product);
 
+                // Finish the activity
+                finish();
+            }
+        });
     }
 }
