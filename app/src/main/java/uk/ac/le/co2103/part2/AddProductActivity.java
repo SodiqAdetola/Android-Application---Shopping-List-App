@@ -1,6 +1,8 @@
 package uk.ac.le.co2103.part2;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
@@ -47,7 +49,7 @@ public class AddProductActivity extends AppCompatActivity {
         String quantityStr = editTextQuantity.getText().toString().trim();
         String unit = spinner.getSelectedItem().toString();
 
-        // Check if any field is empty
+        // Check field is empty
         if (name.isEmpty() || quantityStr.isEmpty()) {
             Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
             return;
@@ -56,24 +58,34 @@ public class AddProductActivity extends AppCompatActivity {
         int quantity = Integer.parseInt(quantityStr);
 
         ProductViewModel productViewModel = new ViewModelProvider(this).get(ProductViewModel.class);
+        LiveData<Product> productLiveData = productViewModel.getProductByNameAndListId(name, shoppingListId);
 
-        productViewModel.getProductByNameAndListId(name, shoppingListId).observe(this, existingProduct -> {
-            if (existingProduct != null) {
-                // Product with the same name already exists
-                Toast.makeText(this, "Product already exists", Toast.LENGTH_SHORT).show();
-            } else {
-                // Create the product object
-                Product product = new Product(name);
-                product.setQuantity(quantity);
-                product.setUnit(unit);
-                product.setShoppingListId(shoppingListId); // Associate the product with the current shopping list
+        Observer<Product> observer = new Observer<Product>() {
+            @Override
+            public void onChanged(Product existingProduct) {
 
-                // Insert the product into the database
-                productViewModel.insert(product);
+                productLiveData.removeObserver(this);
 
-                // Finish the activity
-                finish();
+                // Check if product already exists
+                if (existingProduct != null) {
+
+                    Toast.makeText(AddProductActivity.this, "Product already exists", Toast.LENGTH_SHORT).show();
+                } else {
+                    // Create product object
+                    Product product = new Product(name);
+                    product.setQuantity(quantity);
+                    product.setUnit(unit);
+                    product.setShoppingListId(shoppingListId);
+
+                    // Insert product
+                    productViewModel.insert(product);
+
+                    // Finish activity
+                    finish();
+                }
             }
-        });
+        };
+
+        productLiveData.observe(this, observer);
     }
 }

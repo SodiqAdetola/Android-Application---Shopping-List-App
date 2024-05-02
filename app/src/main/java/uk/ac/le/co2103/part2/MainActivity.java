@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         shoppingListViewModel = new ViewModelProvider(this).get(ShoppingListViewModel.class);
 
         shoppingListViewModel.getAllShoppingLists().observe(this, shoppingLists -> {
-            // Update the cached copy of the words in the adapter.
+
             adapter.submitList(shoppingLists);
         });
 
@@ -70,11 +70,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // Set OnItemLongClickListener for individual items in the RecyclerView
+
         adapter.setOnItemLongClickListener(new ShoppingListAdapter.OnItemLongClickListener() {
             @Override
             public void onItemLongClick(ShoppingList shoppingList) {
-                // Handle long-click event here (delete shopping list and contained products)
+
                // deleteShoppingList(shoppingList);
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
                 builder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        // Call the method to delete the shopping list
+                        // Call method to delete the shopping list
                         deleteShoppingList(shoppingList);
                     }
                 });
