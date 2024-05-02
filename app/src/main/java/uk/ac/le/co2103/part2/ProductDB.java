@@ -11,7 +11,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {Product.class}, version = 3, exportSchema = false)
+@Database(entities = {Product.class, ShoppingList.class}, version = 7, exportSchema = false)
 public abstract class ProductDB extends RoomDatabase {
 
     public abstract ProductDao productDao();

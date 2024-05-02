@@ -11,7 +11,7 @@
 
        <!--recycler view to display shoppinglist items -->
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerview"
+        android:id="@+id/recyclerviewProduct"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="@dimen/big_padding"
@@ -19,15 +19,17 @@
         tools:layout_editor_absoluteY="0dp"
         tools:listitem="@layout/recyclerview_item" />
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="55dp"
-        android:layout_height="18dp"
-        android:text="ShoppingListActivity"
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabAddProduct"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:clickable="true"
+        android:contentDescription="@string/add_product"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:srcCompat="@drawable/ic_baseline_add_24" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

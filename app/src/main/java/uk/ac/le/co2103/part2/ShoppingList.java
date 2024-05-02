@@ -8,7 +8,6 @@ import androidx.room.PrimaryKey;
 import java.util.List;
 
 @Entity(tableName = "ShoppingList_table")
-
 public class ShoppingList {
 
     @PrimaryKey(autoGenerate = true)

@@ -12,7 +12,7 @@ import java.util.concurrent.Executors;
 //import uk.ac.le.co2103.part2.domain.Product;
 //import uk.ac.le.co2103.part2.domain.ShoppingList;
 
-@Database(entities = {ShoppingList.class, Product.class}, version = 3, exportSchema = false)
+@Database(entities = {ShoppingList.class, Product.class}, version = 7, exportSchema = false)
 public abstract class ShoppingListDB extends RoomDatabase {
 
     public abstract ShoppingListDao shoppinglistDao();

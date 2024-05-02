@@ -6,13 +6,14 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
+import androidx.room.Transaction;
 
 import java.util.List;
 
 @Dao
 public interface ShoppingListDao {
 
-        @Insert(onConflict = OnConflictStrategy.IGNORE)
+        @Insert(onConflict = OnConflictStrategy.REPLACE)
         void insert(ShoppingList shoppinglist);
 
         @Query("DELETE FROM ShoppingList_table")
@@ -26,5 +27,7 @@ public interface ShoppingListDao {
 
         @Query("DELETE FROM ShoppingList_table WHERE ListId = :shoppingListId")
         void deleteProductsByShoppingListId(int shoppingListId);
+
+
 
 }

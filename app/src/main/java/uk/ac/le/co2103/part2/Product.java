@@ -4,16 +4,27 @@ import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "product_table")
 public class Product {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = false)
     @NonNull
-    @ColumnInfo(name = "Name")
     private String name;
     private int quantity;
     private String unit;
+
+    @ColumnInfo(index = true)
+    private int shoppingListId;
+
+    public int getShoppingListId() {
+        return shoppingListId;
+    }
+
+    public void setShoppingListId(int shoppingListId) {
+        this.shoppingListId = shoppingListId;
+    }
 
     public Product(@NonNull String name) {
         this.name = name;
@@ -22,7 +33,7 @@ public class Product {
     public String getProduct() {
         return name;
     }
-@NonNull
+    @NonNull
     public String getName() {
         return name;
     }
@@ -46,4 +57,6 @@ public class Product {
     public void setUnit(String unit) {
         this.unit = unit;
     }
+
+
 }

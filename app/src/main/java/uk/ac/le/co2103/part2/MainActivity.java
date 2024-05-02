@@ -65,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(ShoppingList shoppingList) {
                 // Launch ShoppingListActivity when a shopping list item is clicked
                 Intent intent = new Intent(MainActivity.this, ShoppingListActivity.class);
+                intent.putExtra("LIST_ID", shoppingList.getListId());
                 startActivityForResult(intent, SHOPPING_LIST_ACTIVITY_REQUEST_CODE);
             }
         });

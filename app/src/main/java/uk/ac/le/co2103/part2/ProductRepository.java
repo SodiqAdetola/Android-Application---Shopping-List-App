@@ -22,4 +22,8 @@ public class ProductRepository {
             productDao.insert(product);
         });
     }
+    public LiveData<List<Product>> getProductsByShoppingListId(int shoppingListId) {
+        return productDao.getProductsByShoppingListId(shoppingListId);
+    }
+
 }
