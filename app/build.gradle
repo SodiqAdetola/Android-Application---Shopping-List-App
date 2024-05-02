@@ -42,7 +42,10 @@ dependencies {
     annotationProcessor "androidx.room:room-compiler:$rootProject.roomVersion"
     androidTestImplementation "androidx.room:room-testing:$rootProject.roomVersion"
 
+    def room_version = "2.4.0-alpha03" //Needs to be this version to build on apple M1 chips
 
+    implementation "androidx.room:room-runtime:$room_version"
+    annotationProcessor "androidx.room:room-compiler:$room_version"
 
     // Lifecycle
     implementation "androidx.lifecycle:lifecycle-viewmodel:$rootProject.lifecycleVersion"
