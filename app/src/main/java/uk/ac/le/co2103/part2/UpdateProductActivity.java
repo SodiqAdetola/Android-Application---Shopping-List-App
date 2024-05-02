@@ -40,7 +40,7 @@ public class UpdateProductActivity extends AppCompatActivity {
         productViewModel.getProductByNameAndListId(productName, shoppingListId).observe(this, product -> {
             if (product != null) {
                 editTextQuantity.setText(String.valueOf(product.getQuantity()));
-                textViewName.setText(productName + " (" + product.getUnit() + ")");
+                textViewName.setText(productName + "\n(" + product.getUnit() + ")");
 
             }
         });
@@ -81,7 +81,7 @@ public class UpdateProductActivity extends AppCompatActivity {
                 // Update the product in the database
                 productViewModel.updateProduct(updatedProduct);
 
-                // Finish the activity and return to ShoppingListActivity
+                //return activity to ShoppingListActivity
                 finish();
             }
         });
